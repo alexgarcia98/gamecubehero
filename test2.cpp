@@ -10,6 +10,7 @@ struct MidiNote {
    int tick;
    int duration;
    uint8_t note;
+   bool isLong = false;
    bool operator==(const MidiNote& rhs) {
       return tick==rhs.tick && duration==rhs.duration && note==rhs.note;
    }
@@ -102,6 +103,7 @@ int main(int argc, char** argv) {
             note.tick=midifile[track][event].tick;
             note.duration=midifile[track][event].getTickDuration();
             note.note=midifile[track][event][1];//get the note
+            if(note.duration > song.tpq) note.isLong=true;
             song.notes.push_back(note);
          }
       }
@@ -131,7 +133,7 @@ int main(int argc, char** argv) {
    for(int i=0;i<song.notes.size();i++) {
       std::cout<<song.notes[i].tick<<"\t"<<song.notes[i].duration<<"\t"<<(int)song.notes[i].note<<std::endl;
    }
-
+   printf("TPQ: %d\n", song.tpq);
    printf("Initial: %d\n", firstcount);
    printf("Before: %d\nAfter: ", before);
 
