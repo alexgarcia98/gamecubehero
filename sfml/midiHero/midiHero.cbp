@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="midiHero" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/midiHero" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="../../../../../../../MinGW/lib/libopengl32.a" />
+					<Add library="../../../../../../../MinGW/lib/libFLAC.a" />
+					<Add library="../../../../../../../MinGW/lib/libfreetype.a" />
+					<Add library="../../../../../../../MinGW/lib/libogg.a" />
+					<Add library="../../../../../../../MinGW/lib/libgdi32.a" />
+					<Add library="../../../../../../../MinGW/lib/libvorbis.a" />
+					<Add library="../../../../../../../MinGW/lib/libvorbisenc.a" />
+					<Add library="../../../../../../../MinGW/lib/libvorbisfile.a" />
+					<Add library="../../../../../../../MinGW/lib/libwinmm.a" />
+					<Add library="../../../../../../../MinGW/lib/libws2_32.a" />
+					<Add library="../../../../../../../MinGW/lib/libsfml-system-s.a" />
+					<Add library="../../../../../../../MinGW/lib/libsfml-window-s.a" />
+					<Add library="../../../../../../../MinGW/lib/libsfml-audio-s.a" />
+					<Add library="../../../../../../../MinGW/lib/libsfml-graphics-s.a" />
+					<Add library="../../../../../../../MinGW/lib/libsfml-network-s.a" />
+					<Add library="../../../../../../../MinGW/lib/libsfml-main.a" />
+					<Add library="../../../../../../../MinGW/lib/libsfml-system.a" />
+					<Add library="../../../../../../../MinGW/lib/libsfml-window.a" />
+					<Add library="../../../../../../../MinGW/lib/libsfml-graphics.a" />
+					<Add library="../../../../../../../MinGW/lib/libsfml-audio.a" />
+					<Add library="../../../../../../../MinGW/lib/libsfml-network.a" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/midiHero" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../../../../midihero-master/GamecubeHero/Binasc.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/Binasc.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/JoystickController.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/JoystickController.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/JoystickManager.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/JoystickManager.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/Lanes.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/Lanes.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/Note.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/NoteManager.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/NoteManager.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/NoteSpawnManager.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/NoteSpawnManager.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/NoteTypes.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/NoteTypes.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/PlayableSong.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/PlayableSong.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/ResourceManager.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/ResourceManager.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/ResourcePath.hpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/GamecubeHero/main.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/MidiEvent.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/MidiEvent.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/MidiEventList.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/MidiEventList.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/MidiFile.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/MidiFile.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/MidiMessage.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/MidiMessage.h" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/Options.cpp" />
+		<Unit filename="../../../../midihero-master/GamecubeHero/Options.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

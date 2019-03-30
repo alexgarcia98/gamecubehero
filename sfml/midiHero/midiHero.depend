@@ -1,0 +1,166 @@
+# depslib dependency file v1.0
+1546301058 source:c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\joystickcontroller.cpp
+	"JoystickController.h"
+
+1546301058 c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\joystickcontroller.h
+	<iostream>
+
+1546302011 source:c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\joystickmanager.cpp
+	"JoystickManager.h"
+
+1546301058 c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\joystickmanager.h
+	<iostream>
+
+1546301058 source:c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\lanes.cpp
+	"Lanes.h"
+
+1546301058 c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\lanes.h
+	<iostream>
+	"NoteTypes.h"
+
+1546301059 c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\notetypes.h
+	<iostream>
+	<array>
+
+1546301058 source:c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\notemanager.cpp
+	"NoteManager.h"
+
+1546301058 c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\notemanager.h
+	<iostream>
+	<vector>
+	"Note.h"
+
+1546301058 c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\note.h
+	<iostream>
+	<array>
+	<SFML/Graphics/Sprite.hpp>
+	<SFML/Graphics/RenderTarget.hpp>
+	<SFML/System/Time.hpp>
+	"ResourceManager.h"
+	"ResourcePath.hpp"
+	"NoteTypes.h"
+
+1546301059 c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\resourcemanager.h
+	<iostream>
+	<map>
+	<SFML/Graphics/Texture.hpp>
+	<SFml/Audio/SoundBuffer.hpp>
+
+1546301059 c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\resourcepath.hpp
+	<string>
+
+1546301059 source:c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\notespawnmanager.cpp
+	"NoteSpawnManager.h"
+
+1546301059 c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\notespawnmanager.h
+	<iostream>
+
+1546301059 source:c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\notetypes.cpp
+	"NoteTypes.h"
+
+1546301058 source:c:\users\aaron\desktop\midihero-master\gamecubehero\binasc.cpp
+	"Binasc.h"
+	<sstream>
+	<stdlib.h>
+
+1546301058 c:\users\aaron\desktop\midihero-master\gamecubehero\binasc.h
+	<iostream>
+	<fstream>
+	<string>
+	<cstdlib>
+	<stdlib.h>
+
+1546301059 source:c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\resourcemanager.cpp
+	"ResourceManager.h"
+
+1546301058 source:c:\users\aaron\desktop\midihero-master\gamecubehero\midievent.cpp
+	"MidiEvent.h"
+	<stdlib.h>
+
+1546301058 c:\users\aaron\desktop\midihero-master\gamecubehero\midievent.h
+	"MidiMessage.h"
+	<vector>
+
+1546301058 c:\users\aaron\desktop\midihero-master\gamecubehero\midimessage.h
+	<vector>
+	<string>
+
+1546301058 source:c:\users\aaron\desktop\midihero-master\gamecubehero\midieventlist.cpp
+	"MidiEventList.h"
+	<vector>
+	<algorithm>
+	<iterator>
+	<utility>
+	"stdlib.h"
+
+1546301058 c:\users\aaron\desktop\midihero-master\gamecubehero\midieventlist.h
+	"MidiEvent.h"
+	<vector>
+
+1546301058 source:c:\users\aaron\desktop\midihero-master\gamecubehero\midifile.cpp
+	"MidiFile.h"
+	"Binasc.h"
+	<string>
+	<vector>
+	<iostream>
+	<iomanip>
+	<fstream>
+	<sstream>
+	<iterator>
+	<algorithm>
+
+1546302011 c:\users\aaron\desktop\midihero-master\gamecubehero\midifile.h
+	"MidiEventList.h"
+	<vector>
+	<string>
+	<istream>
+	<fstream>
+
+1546301058 source:c:\users\aaron\desktop\midihero-master\gamecubehero\midimessage.cpp
+	"MidiMessage.h"
+	<vector>
+	<iostream>
+	<iterator>
+
+1546301058 source:c:\users\aaron\desktop\midihero-master\gamecubehero\options.cpp
+	"Options.h"
+	<stdlib.h>
+	<string>
+	<vector>
+	<cctype>
+	<iostream>
+	<algorithm>
+
+1546301058 c:\users\aaron\desktop\midihero-master\gamecubehero\options.h
+	<iostream>
+	<map>
+	<string>
+	<vector>
+
+1546301059 source:c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\playablesong.cpp
+	"PlayableSong.h"
+
+1546301840 c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\playablesong.h
+	<iostream>
+	<vector>
+	<SFML/Audio/Music.hpp>
+	<SFML/System/Time.hpp>
+	"C:\Users\Aaron\Desktop\midihero-master\GamecubeHero\MidiFile.h"
+	"NoteTypes.h"
+
+1553928821 source:c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\main.cpp
+	<iostream>
+	<SFML/Audio.hpp>
+	<SFML/Graphics.hpp>
+	"C:\Users\Aaron\Desktop\midihero-master\GamecubeHero\MidiFile.h"
+	"C:\Users\Aaron\Desktop\midihero-master\GamecubeHero\Options.h"
+	"ResourcePath.hpp"
+	"NoteManager.h"
+	"PlayableSong.h"
+	"Lanes.h"
+
+1546303771 source:c:\users\aaron\desktop\midihero-master\gamecubehero\gamecubehero\note.cpp
+	"Note.h"
+	<math.h>
+	<cmath>
+
