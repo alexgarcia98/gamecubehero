@@ -11,10 +11,12 @@
 PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int track, int endtrack) {
     song.openFromFile(songPath);
     int tracks = midifile.getTrackCount();
-
+    
     //TPQ
     Song song;
     song.tpq=midifile.getTicksPerQuarterNote();
+    tpq=song.tpq;
+
 
     /*
     if(tracks>1) {
@@ -24,7 +26,6 @@ PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int tr
     for(;track<endtrack; track++) {
         for(int event=0; event<midifile[track].size(); event++) {
             firstcount++;
-            //std::cout<<"command byte: "<<std::hex<<midifile[track][event].getCommandByte()<<std::endl;
             if(midifile[track][event].isNoteOn()) {
                 //save tick because this thing's on fire
                 //save duration and tick
@@ -32,14 +33,14 @@ PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int tr
                 note.tick=midifile[track][event].tick;
                 //note.tickTime=sf::seconds(note.tick/midifile[track][event].getTempoTPS(song.tpq));
                 note.tickTime=sf::seconds(midifile.getTimeInSeconds(track, event));
-
-
+                
+                
                 note.duration=midifile[track][event].getTickDuration();
                 //note.durationTime=sf::seconds(note.duration/midifile[track][event].getTempoTPS(song.tpq));
                 note.durationTime=sf::seconds(midifile[track][event].getDurationInSeconds());
-
+                
                 note.note=midifile[track][event][1];//get the note
-                //if(note.duration > song.tpq) note.isLong=true;
+                if(note.duration > song.tpq) note.isLong=true;
                 song.notes.push_back(note);
             }
         }
@@ -47,9 +48,7 @@ PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int tr
     int before = song.notes.size();
     MidiNote::Compare comp;
     std::sort(song.notes.begin(), song.notes.end(), comp);
-
     for(int i=1; i<song.notes.size(); i++) {
-
         if(song.notes[i]== song.notes[i-1]) {
             song.notes.erase(song.notes.begin()+i);
             i--;
@@ -67,20 +66,19 @@ PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int tr
             continue;
         }
     }
-    /*
-    for(int i=0;i<song.notes.size();i++) {
+    
+    /*for(int i=0;i<song.notes.size();i++) {
         std::cout<<song.notes[i].tick<<"\t"<<song.notes[i].duration<<"\t"<<(int)song.notes[i].note<<std::endl;
-    }
+    }*/
     printf("TPQ: %d\n", song.tpq);
     printf("Initial: %d\n", firstcount);
     printf("Before: %d\nAfter: %d\n", before, (int)song.notes.size());
-    */
+    
     std::cout<<"Spawn Time\tDuration\tBUTTON\t\tIsLong?"<<std::endl;
     for(int i=0;i<song.notes.size();i++) {
         spawns.push_back(makeSpawn(song.notes[i]));
         //std::cout<<std::to_string(spawns[i].spawnTime.asSeconds())<<" \t"<<std::to_string(spawns[i].duration.asSeconds())<<"\t"<<NamedNotes::toString(spawns[i].button)<<"\t"<<(spawns[i].isLong ? "true" : "false")<<std::endl;
     }
-
 }
 
 PlayableSong::NoteSpawn PlayableSong::makeSpawn(MidiNote& note) {
@@ -91,6 +89,7 @@ PlayableSong::NoteSpawn PlayableSong::makeSpawn(MidiNote& note) {
     spawn.duration=note.durationTime;
     spawn.button=note_to_type(note.note);
     spawn.isLong=note.isLong;
+    spawn.tickSig=note.tick;
     return spawn;
     //return {sf::seconds(note.tick/1600.f), sf::seconds(note.duration/1600.f), note_to_type(note.note), note.isLong};
 }
@@ -105,7 +104,35 @@ std::vector<PlayableSong::NoteSpawn> PlayableSong::getSpawns(sf::Time curr, sf::
     return ans;
 }
 
+//inclusive in
+inline bool in(int x, int a, int b) {
+    return x >= a && x <=b;
+}
+
 NoteTypes PlayableSong::note_to_type(int note) {
+    //Low notes
+    if(in(note, 21, 26)) return L2;
+    if(in(note, 27, 31)) return L1;
+    if(in(note, 32, 37)) return LEFT;
+    if(in(note, 38, 42)) return UP;
+    if(in(note, 43, 48)) return DOWN;
+    if(in(note, 49, 54)) return RIGHT;
+    //Middle notes
+    if(in(note, 55, 59)) return SQUARE;
+    if(in(note, 60, 63)) return TRIANGLE;
+    if(in(note, 64, 67)) return X;
+    if(in(note, 68, 71)) return CIRCLE;
+    if(in(note, 72, 75)) return R1;
+    if(in(note, 76, 79)) return R2;
+    //High notes
+    if(in(note, 80, 84)) return SQUARE;
+    if(in(note, 85, 89)) return TRIANGLE;
+    if(in(note, 90, 94)) return X;
+    if(in(note, 95, 99)) return CIRCLE;
+    if(in(note, 100, 104)) return R1;
+    if(in(note, 105, 108)) return R2;
+    return COUNT;
+    /*
     //Low notes
     if(note >= 21 && note <= 26) return L2;
     if(note >= 27 && note <= 31) return L1;
@@ -113,7 +140,7 @@ NoteTypes PlayableSong::note_to_type(int note) {
     if(note >= 38 && note <= 42) return UP;
     if(note >= 43 && note <= 48) return DOWN;
     if(note >= 49 && note <= 54) return RIGHT;
-    //Middle notesSQUARE
+    //Middle notes
     if(note >= 55 && note <= 59) return SQUARE;
     if(note >= 60 && note <= 63) return TRIANGLE;
     if(note >= 64 && note <= 67) return X;
@@ -128,4 +155,5 @@ NoteTypes PlayableSong::note_to_type(int note) {
     if(note >= 100 && note <= 104) return R1;
     if(note >= 105 && note <= 108) return R2;
     return COUNT;
+     */
 }

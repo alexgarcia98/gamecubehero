@@ -44,7 +44,7 @@ struct Song {
     int tpq;
     std::vector<MidiNote> notes;
     std::string filename;
-
+    
 };
 
 class PlayableSong {
@@ -54,9 +54,11 @@ class PlayableSong {
         sf::Time duration;
         NoteTypes button;
         bool isLong;
+        int tickSig;
     };
     std::vector<NoteSpawn> spawns;
     NoteSpawn makeSpawn(MidiNote& note);
+    int tpq;
 public:
     PlayableSong(smf::MidiFile& midifile, std::string songPath, int track, int endtrack);
     static NoteTypes note_to_type(int note);
@@ -64,6 +66,7 @@ public:
     std::vector<NoteSpawn> getSpawns(sf::Time curr, sf::Time prev);
     NoteSpawn getFirstSpawn() { return spawns[0]; }
     void playSong() { song.play(); }
+    int getTicksPerQuarter() { return tpq; }
 };
 
 #endif /* defined(__GamecubeHero__PlayableSong__) */

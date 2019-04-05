@@ -13,7 +13,7 @@
 #include <array>
 
 enum NoteTypes {
-    L2,
+    L2=0,
     L1,
     LEFT,
     UP,
