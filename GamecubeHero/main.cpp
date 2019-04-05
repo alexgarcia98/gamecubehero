@@ -79,11 +79,11 @@ int main(int argc, char const** argv) {
     //std::string file="passion";
     //std::string file="KHMedley";
     //std::string file="FaceMyFears";
-    //std::string file="RiversInTheDesert";
+    //"RiversInTheDesert";
 
     //"GladItsOver";
-    //std::string file="Disney";
-    //std::string file="Melee";
+    //"Disney";
+    //"Melee";
     //std::string file="SmashUltimate";
     //std::string file="5PM";
     //std::string file="SadnessAndSorrow";
@@ -169,7 +169,7 @@ int main(int argc, char const** argv) {
 
     sf::Time noteSpawnDelay=sf::seconds(5.f);
     sf::Time startTime=curr;
-    sf::Time playMusicTime=noteSpawnDelay+song.getFirstSpawn().spawnTime;//add songoffset to noteSpawnDelay
+    sf::Time playMusicTime=noteSpawnDelay+song.getFirstSpawn(midifile, mainPath+"music/"+file+".ogg").spawnTime;//add songoffset to noteSpawnDelay
     //sf::Time playMusicTime=noteSpawnDelay;//+sf::seconds(1.33f);
     //sf::Time noteSpawnTimer=curr+noteSpawnDelay;
     bool startedPlayingSong=false;

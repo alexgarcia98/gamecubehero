@@ -44,7 +44,7 @@ struct Song {
     int tpq;
     std::vector<MidiNote> notes;
     std::string filename;
-    
+
 };
 
 class PlayableSong {
@@ -57,6 +57,7 @@ class PlayableSong {
         int tickSig;
     };
     std::vector<NoteSpawn> spawns;
+    std::vector<NoteSpawn> spawns1;
     NoteSpawn makeSpawn(MidiNote& note);
     int tpq;
 public:
@@ -64,7 +65,7 @@ public:
     static NoteTypes note_to_type(int note);
     //add spawn delay to times
     std::vector<NoteSpawn> getSpawns(sf::Time curr, sf::Time prev);
-    NoteSpawn getFirstSpawn() { return spawns[0]; }
+    NoteSpawn getFirstSpawn(smf::MidiFile& midifile, std::string songPath);
     void playSong() { song.play(); }
     int getTicksPerQuarter() { return tpq; }
 };

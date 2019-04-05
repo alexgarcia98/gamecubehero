@@ -11,7 +11,7 @@
 PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int track, int endtrack) {
     song.openFromFile(songPath);
     int tracks = midifile.getTrackCount();
-    
+
     //TPQ
     Song song;
     song.tpq=midifile.getTicksPerQuarterNote();
@@ -33,12 +33,12 @@ PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int tr
                 note.tick=midifile[track][event].tick;
                 //note.tickTime=sf::seconds(note.tick/midifile[track][event].getTempoTPS(song.tpq));
                 note.tickTime=sf::seconds(midifile.getTimeInSeconds(track, event));
-                
-                
+
+
                 note.duration=midifile[track][event].getTickDuration();
                 //note.durationTime=sf::seconds(note.duration/midifile[track][event].getTempoTPS(song.tpq));
                 note.durationTime=sf::seconds(midifile[track][event].getDurationInSeconds());
-                
+
                 note.note=midifile[track][event][1];//get the note
                 if(note.duration > song.tpq) note.isLong=true;
                 song.notes.push_back(note);
@@ -66,14 +66,14 @@ PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int tr
             continue;
         }
     }
-    
+
     /*for(int i=0;i<song.notes.size();i++) {
         std::cout<<song.notes[i].tick<<"\t"<<song.notes[i].duration<<"\t"<<(int)song.notes[i].note<<std::endl;
     }*/
     printf("TPQ: %d\n", song.tpq);
     printf("Initial: %d\n", firstcount);
     printf("Before: %d\nAfter: %d\n", before, (int)song.notes.size());
-    
+
     std::cout<<"Spawn Time\tDuration\tBUTTON\t\tIsLong?"<<std::endl;
     for(int i=0;i<song.notes.size();i++) {
         spawns.push_back(makeSpawn(song.notes[i]));
@@ -92,6 +92,75 @@ PlayableSong::NoteSpawn PlayableSong::makeSpawn(MidiNote& note) {
     spawn.tickSig=note.tick;
     return spawn;
     //return {sf::seconds(note.tick/1600.f), sf::seconds(note.duration/1600.f), note_to_type(note.note), note.isLong};
+}
+
+PlayableSong::NoteSpawn PlayableSong::getFirstSpawn(smf::MidiFile& midifile, std::string songPath) {
+song.openFromFile(songPath);
+    int tracks = midifile.getTrackCount();
+    int track = 0;
+    //TPQ
+    Song song;
+    song.tpq=midifile.getTicksPerQuarterNote();
+    tpq=song.tpq;
+
+    int firstcount=0;
+    for(;track<tracks; track++) {
+        for(int event=0; event<midifile[track].size(); event++) {
+            firstcount++;
+            if(midifile[track][event].isNoteOn()) {
+                //save tick because this thing's on fire
+                //save duration and tick
+                MidiNote note;
+                note.tick=midifile[track][event].tick;
+                //note.tickTime=sf::seconds(note.tick/midifile[track][event].getTempoTPS(song.tpq));
+                note.tickTime=sf::seconds(midifile.getTimeInSeconds(track, event));
+
+
+                note.duration=midifile[track][event].getTickDuration();
+                //note.durationTime=sf::seconds(note.duration/midifile[track][event].getTempoTPS(song.tpq));
+                note.durationTime=sf::seconds(midifile[track][event].getDurationInSeconds());
+
+                note.note=midifile[track][event][1];//get the note
+                if(note.duration > song.tpq) note.isLong=true;
+                song.notes.push_back(note);
+            }
+        }
+    }
+    int before = song.notes.size();
+    MidiNote::Compare comp;
+    std::sort(song.notes.begin(), song.notes.end(), comp);
+    for(int i=1; i<song.notes.size(); i++) {
+        if(song.notes[i]== song.notes[i-1]) {
+            song.notes.erase(song.notes.begin()+i);
+            i--;
+            continue;
+        }
+        else if(song.notes[i].note==song.notes[i-1].note &&
+                song.notes[i].tick==song.notes[i-1].tick) {
+            song.notes.erase(song.notes.begin()+(i-1));
+            i--;
+            continue;
+        }
+        if(song.notes[i].duration < 24) {
+            song.notes.erase(song.notes.begin()+(i));
+            i--;
+            continue;
+        }
+    }
+
+    /*for(int i=0;i<song.notes.size();i++) {
+        std::cout<<song.notes[i].tick<<"\t"<<song.notes[i].duration<<"\t"<<(int)song.notes[i].note<<std::endl;
+    }*/
+    printf("TPQ: %d\n", song.tpq);
+    printf("Initial: %d\n", firstcount);
+    printf("Before: %d\nAfter: %d\n", before, (int)song.notes.size());
+
+    std::cout<<"Spawn Time\tDuration\tBUTTON\t\tIsLong?"<<std::endl;
+    for(int i=0;i<song.notes.size();i++) {
+        spawns1.push_back(makeSpawn(song.notes[i]));
+        //std::cout<<std::to_string(spawns[i].spawnTime.asSeconds())<<" \t"<<std::to_string(spawns[i].duration.asSeconds())<<"\t"<<NamedNotes::toString(spawns[i].button)<<"\t"<<(spawns[i].isLong ? "true" : "false")<<std::endl;
+    }
+    return spawns1[0];
 }
 
 std::vector<PlayableSong::NoteSpawn> PlayableSong::getSpawns(sf::Time curr, sf::Time prev) {
