@@ -59,4 +59,11 @@ public:
     virtual ~ButtonMappingPS3() { }
 };
 
+class ButtonMappingPS4:public ButtonMappingJoystick {
+public:
+    ButtonMappingPS4(InputInterface* inputInterface, int joystickID=0):
+    ButtonMappingJoystick(inputInterface, {6, 4, 8, 11, 9, 10, 0, 3, 1, 2, 5, 7}, joystickID) { }
+    virtual ~ButtonMappingPS4() { }
+};
+
 #endif /* defined(__GamecubeHero__ButtonMapping__) */

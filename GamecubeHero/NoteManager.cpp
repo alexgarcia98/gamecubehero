@@ -50,7 +50,7 @@ void NoteManager::onInputDown(NoteTypes button) {
         float s=bottom->smack(smackCenter-bottom->getPos().y);
         if(s==-1.f) {
             //MISS
-            std::cout<<"MISS"<<std::endl;
+            //std::cout<<"MISS"<<std::endl;
             //instant score demult
             //update all prior notes
             score.update();
@@ -63,9 +63,9 @@ void NoteManager::onInputDown(NoteTypes button) {
             //remove it from list
             score.hit(bottom->getTickSig());
             notes.erase(notes.begin()+saved);
-            std::cout<<"HIT: ";
-            std::cout<<bottom->getPos().y-smackCenter;
-            std::cout<<", s="<<s<<std::endl;
+            //std::cout<<"HIT: ";
+            //std::cout<<bottom->getPos().y-smackCenter;
+            //std::cout<<", s="<<s<<std::endl;
             delete bottom;
         }
     }

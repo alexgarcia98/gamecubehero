@@ -74,15 +74,15 @@ public:
     sf::Uint64 getCurrentStreak() const {
         return streak;
     }
-    sf::Uint64 getHitAccuracy() const {
+    int getHitAccuracy() const {
         if(total != 0)
             return (hits / total) * 100;
         else
             return 100;
     }
-    sf::Uint64 getEffectiveAccuracy() const {
+    int getEffectiveAccuracy() const {
         if(total != 0) {
-            sf::Uint64 value = ((total - misses) / total) * 100;
+            int value = ((total - misses) / total) * 100;
             if(value < 0)
                 return 0;
             else

@@ -7,9 +7,16 @@
 //
 
 #include "PlayableSong.h"
+#include <iostream>
 
-PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int track, int endtrack) {
+PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int track, int endtrack, int tracklist[], int tracklength) {
     song.openFromFile(songPath);
+    if(tracklist != nullptr) {
+        track = 0;
+    }
+    else {
+        tracklist[0] = track;
+    }
     int tracks = midifile.getTrackCount();
 
     //TPQ
@@ -23,23 +30,22 @@ PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int tr
         track=1;
     }*/
     int firstcount=0;
-    for(;track<endtrack; track++) {
-        for(int event=0; event<midifile[track].size(); event++) {
+    for(;track<tracklength; track++) {
+        for(int event=0; event<midifile[tracklist[track]].size(); event++) {
             firstcount++;
-            if(midifile[track][event].isNoteOn()) {
+            if(midifile[tracklist[track]][event].isNoteOn()) {
                 //save tick because this thing's on fire
                 //save duration and tick
                 MidiNote note;
-                note.tick=midifile[track][event].tick;
+                note.tick=midifile[tracklist[track]][event].tick;
                 //note.tickTime=sf::seconds(note.tick/midifile[track][event].getTempoTPS(song.tpq));
-                note.tickTime=sf::seconds(midifile.getTimeInSeconds(track, event));
+                note.tickTime=sf::seconds(midifile.getTimeInSeconds(tracklist[track], event));
 
-
-                note.duration=midifile[track][event].getTickDuration();
+                note.duration=midifile[tracklist[track]][event].getTickDuration();
                 //note.durationTime=sf::seconds(note.duration/midifile[track][event].getTempoTPS(song.tpq));
-                note.durationTime=sf::seconds(midifile[track][event].getDurationInSeconds());
+                note.durationTime=sf::seconds(midifile[tracklist[track]][event].getDurationInSeconds());
 
-                note.note=midifile[track][event][1];//get the note
+                note.note=midifile[tracklist[track]][event][1];//get the note
                 if(note.duration > song.tpq) note.isLong=true;
                 song.notes.push_back(note);
             }
@@ -61,9 +67,9 @@ PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int tr
             continue;
         }
         if(song.notes[i].duration < 24) {
-            song.notes.erase(song.notes.begin()+(i));
-            i--;
-            continue;
+            //song.notes.erase(song.notes.begin()+(i));
+            //i--;
+            //continue;
         }
     }
 
@@ -75,8 +81,24 @@ PlayableSong::PlayableSong(smf::MidiFile& midifile, std::string songPath, int tr
     printf("Before: %d\nAfter: %d\n", before, (int)song.notes.size());
 
     std::cout<<"Spawn Time\tDuration\tBUTTON\t\tIsLong?"<<std::endl;
+    PlayableSong::NoteSpawn t;
+    t.tickSig = -1;
     for(int i=0;i<song.notes.size();i++) {
-        spawns.push_back(makeSpawn(song.notes[i]));
+        //spawns.push_back(makeSpawn(song.notes[i]));
+        //std::cout<<"error"<<std::endl;
+        PlayableSong::NoteSpawn s = makeSpawn(song.notes[i]);
+        if(t.tickSig != -1) {
+            if(s.button == t.button) {
+                if(s.spawnTime == t.spawnTime) {
+                    //std::cout<<"error"<<std::endl;
+                    continue;
+                }
+            }
+        }
+        spawns.push_back(s);
+        t = s;
+
+
         //std::cout<<std::to_string(spawns[i].spawnTime.asSeconds())<<" \t"<<std::to_string(spawns[i].duration.asSeconds())<<"\t"<<NamedNotes::toString(spawns[i].button)<<"\t"<<(spawns[i].isLong ? "true" : "false")<<std::endl;
     }
 }
@@ -85,7 +107,7 @@ PlayableSong::NoteSpawn PlayableSong::makeSpawn(MidiNote& note) {
     NoteSpawn spawn;
     //spawn.spawnTime=sf::seconds(note.tick/160.f);
     //spawn.duration=sf::seconds(note.duration/160.f);
-    spawn.spawnTime=note.tickTime;
+    spawn.spawnTime=note.tickTime;// * (float)(0.98496240601);
     spawn.duration=note.durationTime;
     spawn.button=note_to_type(note.note);
     spawn.isLong=note.isLong;

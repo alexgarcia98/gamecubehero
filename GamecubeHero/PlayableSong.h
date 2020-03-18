@@ -61,7 +61,7 @@ class PlayableSong {
     NoteSpawn makeSpawn(MidiNote& note);
     int tpq;
 public:
-    PlayableSong(smf::MidiFile& midifile, std::string songPath, int track, int endtrack);
+    PlayableSong(smf::MidiFile& midifile, std::string songPath, int track, int endtrack, int tracklist[], int tracklength);
     static NoteTypes note_to_type(int note);
     //add spawn delay to times
     std::vector<NoteSpawn> getSpawns(sf::Time curr, sf::Time prev);

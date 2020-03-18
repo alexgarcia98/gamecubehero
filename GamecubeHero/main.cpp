@@ -50,46 +50,86 @@ int main(int argc, char const** argv) {
     std::string mainPath="C:/Users/alexgarcia98/midihero-master/GamecubeHero/GamecubeHero/";
     int track = 0;
     int endtrack = 1;
+    int tracklist [10];
+    tracklist[0] = 0;
+    int tracklength = 1;
 
+    sf::Time extraDelay = sf::milliseconds(0);
+    sf::Time reduceDelay = sf::milliseconds(150);
     std::string file=
     // Beginner
     // "alphabet_songvoice"; track = 1; endtrack = 2;
 
     // Easy
     // "LastSurprise"; // Melody
-    // "Mii"; // HIGH SCORE: 52542 | PG Gars 4/4/19
+    // "Mii";
+    // "BrambleBlast"; track = 5; endtrack = 7;
+
 
 
     // Medium
-    // "LifeWillChange";
-    "LastSurprise"; track = 1; endtrack = 2; // Piano
+    //"LifeWillChange"; // HS: 59175 - Alex
+    // "LifeWillChange2"; reduceDelay=sf::milliseconds(700);
+    // "LastSurprise"; track = 1; endtrack = 2; // Piano
+    // "LastSurprise2"; track = 1; endtrack = 2; reduceDelay=sf::milliseconds(850); // Surprising HS: 30950 - Alex
     // "FurElise";
+    // "TheEntertainer";
 
 
 
     // Hard
-    // "FountainOfDreams"; // HIGH SCORE: 82648 | Nemui Kitsune 4/4/19
+    // "FountainOfDreams"; track = 0; endtrack = 1;
     // "HesAPirate";
+    // "CharlieBrown";
+    // "FloweringNight";
+    // "FlightOfTheBumblebee";
+
 
     // Expert
+
 
     // Master
     // "FreedomDive";
 
     //std::string file="passion";
     //std::string file="KHMedley";
-    //std::string file="FaceMyFears";
+    //"FaceMyFears"; track = 1; endtrack = 2;
     //"RiversInTheDesert";
-
+    //"BigBlue"; track = 1; endtrack = 2;
     //"GladItsOver";
     //"Disney";
+    //"PalletTown";
     //"Melee";
-    //std::string file="SmashUltimate";
+    //"CliffsOfDover"; track = 12; endtrack = 13;
+    //"SouljaBoy"; track = 0; endtrack = 1;
+    //"SongOfStorms"; track = 2; endtrack = 3;
+    //"SmashUltimate";
+    //"ThroughTheFireAndTheFlames"; track = 1; endtrack = 2;
     //std::string file="5PM";
     //std::string file="SadnessAndSorrow";
-    //"MIDIlovania"; track = 0; endtrack = 12;
-    //std::string file="CharlieBrown";
-    //std::string file="TheEntertainer";
+
+    // "MIDIlovania";
+
+    // right
+    // tracklist[0] = 2; tracklist[1] = 5; tracklist[2] = 12;
+    // tracklength = 3;
+
+    // high right
+    // tracklist[0] = 7; tracklist[1] = 10; tracklist[2] = 11;
+    // tracklength = 3;
+
+    // right??
+    // tracklist[0] = 2; tracklist[1] = 9; tracklist[2] = 16; tracklist[3] = 17;
+    // tracklength = 4;
+
+    // ???
+    // tracklist[0] = 3; tracklist[1] = 4; tracklist[2] = 8; tracklist[3] = 16;
+    // tracklength = 4;
+
+    // left
+    // tracklist[0] = 13; tracklist[1] = 14; tracklist[2] = 15; tracklist[3] = 18;
+    // tracklength = 4;
+
     //std::string file="RondoAllaTurca";
     //std::string file="BohemianRhapsody";
     //std::string file="GoingToCalifornia";
@@ -100,13 +140,78 @@ int main(int argc, char const** argv) {
     //std::string file="GeraltOfRivia";
     //std::string file="ThankUNext";
     //std::string file="WishYouWereGay";
-    //std::string file="SeptetteForTheDeadPrincess";
-    //std::string file="RenaiCirculation";
-    //std::string file="RollingInTheDeep";
+    //"SeptetteForTheDeadPrincess";
+    //"RenaiCirculation";
+    //"RollingInTheDeep";
     //std::string file="LadyCupid";
     //track = 1; endtrack = 2; // melody
     //track = 3; endtrack = 4; //harmony
+    //"HotelCalifornia";
+    //"NightOfFire"; track = 5; endtrack = 6;
     //"The_Eagles_-_Hotel_California";
+    //"RiversInTheDesert2";
+    //"MirorBXD";
+    //"MirorB2";
+    //"PkmnXDGoDMirorB"; track = 9; endtrack = 10; // melody
+    //"Junes";
+    //"layercake"; track = 1; endtrack = 3; // melody
+    //"TheEndInTheWorld";
+    "PersonaExams"; track = 2; endtrack = 3; // melody
+    tracklist[0] = 2; tracklength = 1;
+    //"Passion2"; track = 2; endtrack = 3; // right
+    //"Passion2"; track = 3; endtrack = 4; // left
+    //"Passion2"; track = 2; endtrack = 4; // both
+
+    // Shokugeki
+    //"KibouNoUta"; track = 1; endtrack = 2; // melody
+    //"Spice"; track = 2; endtrack = 3; // melody
+    //"GodTongue";
+    //"Snowdrop"; track = 2; endtrack = 3; // melody
+    //"TheSecretIngredientCalledVictory";
+    //"Braver";
+    //"Symbol"; track = 1; endtrack = 2; // melody
+    //"RisingRainbow"; track = 1; endtrack = 2; // melody
+    //"Atria1";
+    //"Atria2";
+
+    // Persona
+    //"Alleycat"; track = 2; endtrack = 3; // melody
+    //"LastSurprise3"; track = 2; endtrack = 3; // melody
+    //"TheDaysWhenMyMotherWasThere"; track = 2; endtrack = 3; // melody
+    //"TheWhimsOfFate"; track = 2; endtrack = 3; // melody
+    //"SwearToMyBones"; track = 2; endtrack = 3; // melody
+    //"ButterflyKiss"; track = 2; endtrack = 3; // melody
+    //"MassDestruction"; track = 2; endtrack = 3; // melody
+    //"BarCrossroads"; track = 2; endtrack = 3; // melody
+    //"Phantom"; track = 2; endtrack = 3; // melody
+    //"KimiNoKioku"; track = 2; endtrack = 3; // melody
+    //"BurnMyDread"; track = 2; endtrack = 3; // melody
+    //"HeartfulCry"; track = 2; endtrack = 3; // melody
+    //"TheBattleForEveryonesSouls"; track = 2; endtrack = 3; // melody
+    //"BeneathTheMask"; track = 2; endtrack = 3; // melody
+    //"Price"; track = 2; endtrack = 3; // melody
+
+    // Hat
+    // "TrainRush";
+
+    // left
+    // tracklist[0] = 1; tracklist[1] = 13;
+    // tracklist[2] = 15; tracklist[3] = 20;
+    // tracklength = 4;
+
+    // right
+    // tracklist[0] = 2; tracklist[1] = 5; tracklist[2] = 6; tracklist[3] = 7;
+    // tracklist[4] = 8; tracklist[5] = 9; tracklist[6] = 10; tracklength = 7;
+
+    // ???
+    // tracklist[0] = 3; tracklist[1] = 4;
+    // tracklist[2] = 12; tracklist[3] = 14;
+    // tracklist[4] = 16; tracklist[5] = 17;
+    // tracklist[6] = 18; tracklist[7] = 19;
+    // tracklength = 8;
+
+    //"YourContractHasExpired"; track = 1; endtrack = 2; // melody
+    //"TheBattleOfAward42"; track = 1; endtrack = 2; // melody HS: 52325 alex
 
     sf::Font font;
     font.loadFromFile(mainPath+"sansation.ttf");
@@ -124,7 +229,7 @@ int main(int argc, char const** argv) {
     midifile.linkNotePairs();
 
     //generate song from midifile
-    PlayableSong song(midifile, mainPath+"music/"+file+".ogg", track, endtrack);
+    PlayableSong song(midifile, mainPath+"music/"+file+".ogg", track, endtrack, tracklist, tracklength);
     Lanes lanes;
     float songSpeed=250.f;//1.f/song.getTicksPerQuarter()*57600*4;//250.f;
     std::cout<<"song.tpq="<<song.getTicksPerQuarter()<<std::endl;
@@ -169,7 +274,7 @@ int main(int argc, char const** argv) {
 
     sf::Time noteSpawnDelay=sf::seconds(5.f);
     sf::Time startTime=curr;
-    sf::Time playMusicTime=noteSpawnDelay+song.getFirstSpawn(midifile, mainPath+"music/"+file+".ogg").spawnTime;//add songoffset to noteSpawnDelay
+    sf::Time playMusicTime=noteSpawnDelay+song.getFirstSpawn(midifile, mainPath+"music/"+file+".ogg").spawnTime-reduceDelay+extraDelay;//add songoffset to noteSpawnDelay
     //sf::Time playMusicTime=noteSpawnDelay;//+sf::seconds(1.33f);
     //sf::Time noteSpawnTimer=curr+noteSpawnDelay;
     bool startedPlayingSong=false;
@@ -286,7 +391,7 @@ int main(int argc, char const** argv) {
                 if(rightPressed == false) {
                     rightPressed = true;
                     noteManager.onInputDown(RIGHT);
-                    std::cout<<"dpad: right"<<std::endl;
+                    //std::cout<<"dpad: right"<<std::endl;
                 }
             }
             else if (xpos < 25) {
@@ -298,7 +403,7 @@ int main(int argc, char const** argv) {
                 if(leftPressed == false) {
                     leftPressed = true;
                     noteManager.onInputDown(LEFT);
-                    std::cout<<"dpad: left"<<std::endl;
+                    //std::cout<<"dpad: left"<<std::endl;
                 }
             }
             else if (xpos > -25) {
@@ -310,7 +415,7 @@ int main(int argc, char const** argv) {
                 if(upPressed == false) {
                     upPressed = true;
                     noteManager.onInputDown(UP);
-                    std::cout<<"dpad: up"<<std::endl;
+                    //std::cout<<"dpad: up"<<std::endl;
                 }
             }
             else if (ypos < 25) {
@@ -322,7 +427,7 @@ int main(int argc, char const** argv) {
                 if(downPressed == false) {
                     downPressed = true;
                     noteManager.onInputDown(DOWN);
-                    std::cout<<"dpad: down"<<std::endl;
+                    //std::cout<<"dpad: down"<<std::endl;
                 }
             }
             else if (ypos > -25) {

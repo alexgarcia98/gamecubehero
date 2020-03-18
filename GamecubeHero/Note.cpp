@@ -63,7 +63,7 @@ float Note::smack(float distance) {
     }
 }
 void Note::release(float distance) {
-    
+
 }
 void Note::update(sf::Time delta) {
     pos.y+=delta.asSeconds()*speed;
@@ -76,13 +76,13 @@ void Note::draw(sf::RenderTarget& window) {
 LongNote::LongNote(NoteTypes type, int tickSig, sf::Vector2f pos, float songSpeed, sf::Time duration):Note(type, tickSig, pos, songSpeed), duration(duration) {
     std::string mainPath="C:/Users/alexgarcia98/midihero-master/GamecubeHero/GamecubeHero/";
     longspr.setTexture(ResourceManager::getTexture(mainPath+noteTrailTexPaths[type]));
-    
+
     longspr.setScale(duration.asSeconds()*100.f, 0.3f); //should feel backwards because of rotation
-    
+
     longspr.setOrigin(0.f, longspr.getTexture()->getSize().y/2.f);//+x goes down (equals +y*scale screen)
     longspr.setRotation(-90.f);
     longNote=true;
-    
+
     /*rect.setFillColor(sf::Color::Red);
     rect.setSize(sf::Vector2f(SMACKSIZE, SMACKSIZE));
     rect.setOrigin(rect.getSize()/2.f);*/
@@ -96,14 +96,12 @@ float LongNote::smack(float distance) {
     return s;
 }
 void LongNote::release(float distance) {
-    
+
 }
 void LongNote::update(sf::Time delta) {
     Note::update(delta);
 }
 void LongNote::draw(sf::RenderTarget& window) {
-    /*rect.setPosition(getPos());
-    window.draw(rect);*/
     longspr.setPosition(getPos());
     window.draw(longspr);
     Note::draw(window);
